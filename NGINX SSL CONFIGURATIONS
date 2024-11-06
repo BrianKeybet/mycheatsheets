@@ -1,0 +1,23 @@
+#To enable https on a website we need to get a certificate form a certificate authority (CA) like LetsEncrypt(90 days) or Digicert(1 year). The CA needs to verify that you control your domain before issuing the certificate.
+#For LetsEncrypyt, the verifications is done via a software that uses the ACME protocol typically running on your web host. I prefer certbot.
+
+# Set A records on domain service provider to have the subdomain and IP that it points to
+
+##LetsEncrypt Certbot Nginx Ubuntu
+# https://certbot.eff.org/instructions?ws=nginx&os=pip
+1. SSH  into server
+2. Install system dependencies;
+    sudo apt update
+    sudo apt install python3 python3-venv libaugeas0
+3. Remove certbot-auto and any Certbot OS packages;
+    sudo apt-get remove certbot
+4. Set up a Python virtual environment
+    sudo python3 -m venv /opt/certbot/
+    sudo /opt/certbot/bin/pip install --upgrade pip
+5. Install Certbot
+    sudo /opt/certbot/bin/pip install certbot certbot-nginx
+6. Prepare the Certbot command
+    sudo ln -s /opt/certbot/bin/certbot /usr/bin/certbot
+7. Get certbot certificate
+    sudo certbot certonly --nginx
+8. It will need renewal so set cron jobs for renewal & upgrade
