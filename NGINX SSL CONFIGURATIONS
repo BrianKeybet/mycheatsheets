@@ -1,7 +1,16 @@
 #To enable https on a website we need to get a certificate form a certificate authority (CA) like LetsEncrypt(90 days) or Digicert(1 year). The CA needs to verify that you control your domain before issuing the certificate.
 #For LetsEncrypyt, the verifications is done via a software that uses the ACME protocol typically running on your web host. I prefer certbot.
 
-# Set A records on domain service provider to have the subdomain and IP that it points to
+# Set A records on domain service provider to have the subdomain and IP that it points to. Confirms domain ownership and validates traffic when using HTTP based validation (DNS based validation exists)
+
+# Generate a Certificate Signing Request (CSR) - Generated on your server and contains details like domain name and organisation. Sent to CA.
+1. Install OpenSSL
+    sudo apt install openssl
+2. Generate a private key
+    openssl genrsa -out yourdomain.key 2048
+3. Generate the CSR. This command will prompt you to enter information about your organization.
+    openssl req -new -key yourdomain.key -out yourdomain.csr
+
 
 ##LetsEncrypt Certbot Nginx Ubuntu
 # https://certbot.eff.org/instructions?ws=nginx&os=pip
@@ -43,3 +52,17 @@
 
 ##NGinx Configuration
 # .pem & .crt are interchangeable
+1. Set ssl_certificate & ssl_certificate_key e.g;
+server {
+    listen 443 ssl;
+    server_name yourdomain.com;
+
+    ssl_certificate /path/to/your_certificate.crt;
+    ssl_certificate_key /path/to/your_private.key;
+
+    # Optional settings
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+}
+
+
