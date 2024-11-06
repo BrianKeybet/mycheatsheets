@@ -22,6 +22,17 @@
     sudo certbot certonly --nginx
 8. It will need renewal so set cron jobs for renewal & upgrade
 
+# Common Certbot Certificate Files
+## When you obtain an SSL certificate using Certbot, it generates several files in /etc/letsencrypt/live/yourdomain.com/:
+
+1. fullchain.pem: This file contains the entire certificate chain (your certificate plus any intermediate certificates required by browsers). It is usually the primary file used for SSL configurations on servers.
+
+2. cert.pem: This is your website's individual SSL certificate file without the intermediate certificates. Some servers may use this, though most configurations prefer the full chain.
+
+3. privkey.pem: This file holds your private key, which should be kept secure and never shared publicly. It is referenced in your server configuration to complete the SSL setup.
+
+4. chain.pem: This file includes only the intermediate certificates that link your certificate to the root CA. It’s sometimes used if your server specifically requests separate chain files.
+
 ##Digicert Nginx Ubuntu
 # https://www.digicert.com/kb/csr-ssl-installation/nginx-openssl.htm#ssl_certificate_install
 1. Log into Digicert account
@@ -30,4 +41,5 @@
 4. Nginx typically requires only ssl_certificate, which can point to a full chain certificate (a file containing both your site certificate and the intermediate certificates),
    concatenate your primary certificate and intermediate certificate(s) into a single file
 
-#NGinx Configuration
+##NGinx Configuration
+# .pem & .crt are interchangeable
