@@ -53,16 +53,16 @@
 ##NGinx Configuration
 # .pem & .crt are interchangeable
 1. Set ssl_certificate & ssl_certificate_key e.g;
-server {
-    listen 443 ssl;
-    server_name yourdomain.com;
+    server {
+        listen 443 ssl;
+        server_name yourdomain.com;
 
-    ssl_certificate /path/to/your_certificate.crt;
-    ssl_certificate_key /path/to/your_private.key;
+        ssl_certificate /path/to/your_certificate.crt;
+        ssl_certificate_key /path/to/your_private.key;
 
-    # Optional settings
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers HIGH:!aNULL:!MD5;
-}
+        # Optional settings
+        ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_ciphers HIGH:!aNULL:!MD5;
+    }
 
 
