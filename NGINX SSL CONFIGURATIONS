@@ -21,3 +21,13 @@
 7. Get certbot certificate
     sudo certbot certonly --nginx
 8. It will need renewal so set cron jobs for renewal & upgrade
+
+##Digicert Nginx Ubuntu
+# https://www.digicert.com/kb/csr-ssl-installation/nginx-openssl.htm#ssl_certificate_install
+1. Log into Digicert account
+2. Go to orders > Request a certificate > Standard SSL >
+3. Upload a CSR add extra details and download the certificate
+4. Nginx typically requires only ssl_certificate, which can point to a full chain certificate (a file containing both your site certificate and the intermediate certificates),
+   concatenate your primary certificate and intermediate certificate(s) into a single file
+
+#NGinx Configuration
