@@ -1,0 +1,34 @@
+virtualenv .venv && source .venv/bin/activate #Create and then virtual environment
+
+python -m venv .venv #Create virtual environment
+.venv/Scripts/activate #Activate virtual environment
+deactivate #Deactivate virtual environment
+pip install -r requirements.txt #Install dependencies
+
+
+docker-compose -f docker-compose.yml up -d --build 
+docker-compose -f docker-compose.yml down
+
+
+docker exec -it standalone-django-helpdesk-1 /bin/bash
+apt-get install -y net-tools
+netstat -tuln
+
+
+#Building django image alone for trouble shooting
+docker build -f standalone/Dockerfile -t django-helpdesk .
+docker run --name standalone-django-helpdesk -p 8000:8000 django-helpdesk
+
+
+#Viewing django cronjob logs
+docker exec -it <containerid> bash 
+cat /var/log/cron.log
+
+#Accessing DB
+docker exec -it <postgres_container_name> psql -U <username> -d <database_name>
+
+#Restart all contaioners as per config file
+docker-compose -f docker-compose.yml up --build -d
+
+#Restart all containers without a rebuild
+docker-compose restart

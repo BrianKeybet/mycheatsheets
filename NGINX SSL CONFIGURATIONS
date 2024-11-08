@@ -78,5 +78,11 @@ sudo iptables -L INPUT --line-numbers
 # Delete the rule by its line number
 sudo iptables -D INPUT <line_number>
 
+# Persist changes across reboots
+sudo iptables-save | sudo tee /etc/iptables/rules.v4
+
+
+
+
 
 

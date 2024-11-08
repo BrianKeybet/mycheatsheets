@@ -1,0 +1,5 @@
+# Resetting admin password
+# Log into container
+docker exec -it <containerid> bin/bash
+#  Run command
+superset fab reset-password --username <username> --password <new_password>
