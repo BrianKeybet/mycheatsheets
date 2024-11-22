@@ -67,10 +67,10 @@
 
 ## Blocking access to apache server from same network using IP tables
 # Allow access to the port only from localhost
-sudo iptables -A INPUT -p tcp -s 127.0.0.1 --dport 8080 -j ACCEPT
+sudo iptables -A INPUT -p tcp -s 127.0.0.1 --dport 8088 -j ACCEPT
 
 # Drop access to the port from all other IP addresses
-sudo iptables -A INPUT -p tcp --dport 8080 -j DROP
+sudo iptables -A INPUT -p tcp --dport 8088 -j DROP
 
 # List the rules by line numbers
 sudo iptables -L INPUT --line-numbers

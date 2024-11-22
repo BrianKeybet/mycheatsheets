@@ -1,0 +1,61 @@
+# Clone repo
+git clone https://github.com/BrianKeybet/datawarehouse.git
+
+# Stage & commit changes
+git add .
+git commit -m "Description of the changes"
+
+# Push changes to github
+git push origin <branch_name>
+
+# Pull changes
+git pull origin <branch_name>
+
+#Initialize a Git repo
+cd /path/to/your/folder
+git init
+# Add a .gitignore
+git add.
+git commit -m "Initial commit"
+# Create repo on github
+git remote add origin https://github.com/username/my-project.git
+# Push to github
+git branch -M main
+git push -u origin main
+
+#Check for changes on remote repo
+#Fetch updates without applying them
+git fetch origin
+#Check if branch is behind or ahead
+git status
+#Compare local branch with remote
+git log HEAD..origin/main --oneline
+#Pull changes
+git pull origin main
+#Handle merge conflicts if present
+#Stage and complete merge
+git add <filename>
+git commit
+
+# Stash or Commit Local Changes Before Pulling to avoid conflicts
+git stash
+git pull origin main
+git stash pop
+
+
+#Automating Deployments
+# 1 Create deploy.sh file
+Contents:
+#!/bin/bash
+cd /path/to/your/app
+git pull origin <branch_name>
+# Add additional deployment steps, e.g., restarting services
+systemctl restart your-service
+
+# 2 Make the file executable
+chmod +x deploy.sh
+
+# 3 Run the script when deploying
+./deploy.sh
+
+

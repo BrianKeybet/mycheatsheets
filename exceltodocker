@@ -1,0 +1,29 @@
+import pandas as pd
+from sqlalchemy import create_engine
+
+# Path to your Excel file
+excel_file_path = 'your_file.xlsx'
+
+# Read the Excel file into a DataFrame
+df = pd.read_excel(excel_file_path)
+
+# Define your PostgreSQL connection details
+user = 'your_user'
+password = 'your_password'
+host = 'localhost'  # Replace with 'db_container_name' if using Docker network
+port = '5432'
+database = 'your_database'
+
+# Create the SQLAlchemy engine
+engine = create_engine(f'postgresql+psycopg2://{user}:{password}@{host}:{port}/{database}')
+
+# Write DataFrame to PostgreSQL table
+# Set `if_exists='replace'` to replace an existing table, or 'append' to add to it.
+df.to_sql('your_table_name', engine, if_exists='replace', index=False)
+
+print("Data imported successfully.")
+
+## docker exec -it django_container python /data_files/import_script.py
+
+## docker run -v /path/to/excel:/app -w /app --network your_docker_network python:3.9 python import_script.py
+
